@@ -1,5 +1,3 @@
-# Code-for-KDD23
-
 # Spatio-temporal Diffusion Point Processes
 
 This is our Pytorch implementation for SAND.
