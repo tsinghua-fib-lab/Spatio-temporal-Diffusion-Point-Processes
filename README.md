@@ -1,6 +1,6 @@
 # Spatio-temporal Diffusion Point Processes
 
-This is our Pytorch implementation for SAND.
+This is our Pytorch implementation for DSTPP.
 
 The code is tested under a Linux desktop with torch 1.7 and Python 3.8.10.
 
