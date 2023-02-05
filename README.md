@@ -50,6 +50,10 @@ python app.py --dataset Citibike --mode train --timesteps 200 --samplingsteps 20
 python app.py --dataset Independent --mode train --timesteps 200 --samplingsteps 200 --batch_size 128 --total_epochs 2000 
 ``
 
+The trained models are saved in `ModelSave/``.
+
+The logs are saved in `logs/``.
+
 
 ## Note
 
