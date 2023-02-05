@@ -14,6 +14,7 @@ The code is tested under a Linux desktop with torch 1.7 and Python 3.7.10.
 
 ### Dependencies
 1. Install PyTorch 1.7.1 with the correct CUDA version.
+2. Use the ``pip install -r requirements. txt`` command to install all of the Python modules and packages used in this project.
 
 ## Model Training
 
