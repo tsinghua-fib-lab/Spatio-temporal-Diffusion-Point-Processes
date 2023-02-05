@@ -7,8 +7,13 @@ The code is tested under a Linux desktop with torch 1.7 and Python 3.8.10.
 ## Installation
 
 ### Environment
+- Tested OS: Linux
+- Python >= 3.7
+- PyTorch == 1.7.1
+- Tensorboard
 
 ### Dependencies
+1. Install PyTorch 1.7.1 with the correct CUDA version.
 
 ## Model Training
 
