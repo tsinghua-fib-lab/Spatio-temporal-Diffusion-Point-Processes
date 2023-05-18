@@ -58,3 +58,13 @@ The logs are saved in ``logs/``.
 ## Note
 
 The implemention is based on *[DDPM](https://github.com/lucidrains/denoising-diffusion-pytorch)*.
+
+## Note
+
+The implemention is based on *[NJSDE](https://github.com/000Justin000/torchdiffeq/tree/jj585)*.
+
+If you found this library useful in your research, please consider citing:
+
+```
+Coming soon...
+```
