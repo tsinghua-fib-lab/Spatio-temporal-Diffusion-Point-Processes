@@ -2,7 +2,7 @@
 
 ![OverallFramework](./assets/framework.png "Our proposed framework")
 
-This project was initially described in the full research track paper *[Spatio-temporal Diffusion Point Processes](https://github.com/tsinghua-fib-lab/Spatio-temporal-Diffusion-Point-Processes/blob/main/paper/Spatio_temporal_Diffusion_Point_Processes.pdf) at KDD 2023 in Long Beach, CA. Contributors to this project are from the *[Future Intelligence laB (FIB)](https://fi.ee.tsinghua.edu.cn/)* at *[Tsinghua University](https://www.tsinghua.edu.cn/en/)*.
+This project was initially described in the full research track paper *[Spatio-temporal Diffusion Point Processes](https://github.com/tsinghua-fib-lab/Spatio-temporal-Diffusion-Point-Processes/blob/main/paper/Spatio_temporal_Diffusion_Point_Processes.pdf)* at KDD 2023 in Long Beach, CA. Contributors to this project are from the *[Future Intelligence laB (FIB)](https://fi.ee.tsinghua.edu.cn/)* at *[Tsinghua University](https://www.tsinghua.edu.cn/en/)*.
 
 The code is tested under a Linux desktop with torch 1.7 and Python 3.7.10.
 
