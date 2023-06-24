@@ -1,0 +1,23 @@
+# Build and Release Folders
+*__pycache__/
+*.ipynb_checkpoints/
+
+# dataset
+dataset/
+
+# Other files and folders
+.vscode/
+*logs/
+
+# Executables
+*.swf
+*.air
+*.ipa
+*.apk
+*.pyc
+*.ipynb_checkpoints/
+
+
+# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
+# should NOT be excluded as they contain compiler settings and other important
+# information for Eclipse / Flash Builder.
