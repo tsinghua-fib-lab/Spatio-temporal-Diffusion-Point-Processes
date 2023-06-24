@@ -229,6 +229,12 @@ if __name__ == "__main__":
 
                     sampled_seq = Model.diffusion.sample(batch_size = event_time_non_mask.shape[0],cond=enc_out_non_mask)
 
+                    sampled_seq_temporal_all, sampled_seq_spatial_all = [], []
+                    for _ in range(100):
+                        sampled_seq = Model.diffusion.sample(batch_size = event_time_non_mask.shape[0],cond=enc_out_non_mask)
+                        sampled_seq_temporal_all.append((sampled_seq[:,0,:1].detach().cpu() + MIN[1]) * (MAX[1]-MIN[1]))
+                        sampled_seq_spatial_all.append(((sampled_seq[:,0,-opt.dim:].detach().cpu() + torch.tensor([MIN[2:]])) * (torch.tensor([MAX[2:]])-torch.tensor([MIN[2:]]))).unsqueeze(dim=1))
+
                     loss = Model.diffusion(torch.cat((event_time_non_mask,event_loc_non_mask),dim=-1), enc_out_non_mask)
 
                     vb, vb_temporal, vb_spatial = Model.diffusion.NLL_cal(torch.cat((event_time_non_mask,event_loc_non_mask),dim=-1), enc_out_non_mask)
@@ -242,8 +248,10 @@ if __name__ == "__main__":
                     real = (event_time_non_mask[:,0,:].detach().cpu() + MIN[1]) * (MAX[1]-MIN[1])
                     gen = (sampled_seq[:,0,:1].detach().cpu() + MIN[1]) * (MAX[1]-MIN[1])
                     assert real.shape==gen.shape
+                    assert real.shape == sampled_seq_temporal_all.shape
                     mae_temporal += torch.abs(real-gen).sum().item()
                     rmse_temporal += ((real-gen)**2).sum().item()
+                    rmse_temporal_mean += ((real-sampled_seq_temporal_all)**2).sum().item()
                     
                     real = event_loc_non_mask[:,0,:].detach().cpu()
                     assert real.shape[1:] == torch.tensor(MIN[2:]).shape
@@ -251,7 +259,10 @@ if __name__ == "__main__":
                     gen = sampled_seq[:,0,-opt.dim:].detach().cpu()
                     gen = (gen + torch.tensor([MIN[2:]])) * (torch.tensor([MAX[2:]])-torch.tensor([MIN[2:]]))
                     assert real.shape==gen.shape
+                    assert real.shape==sampled_seq_spatial_all.shape
                     mae_spatial += torch.sqrt(torch.sum((real-gen)**2,dim=-1)).sum().item()
+                    mae_spatial_mean += torch.sqrt(torch.sum((real-sampled_seq_spatial_all)**2,dim=-1)).sum().item()
+
 
                     total_num += gen.shape[0]
 
@@ -277,8 +288,10 @@ if __name__ == "__main__":
 
                 writer.add_scalar(tag='Evaluation/mae_temporal_val',scalar_value=mae_temporal/total_num,global_step=itr)
                 writer.add_scalar(tag='Evaluation/rmse_temporal_val',scalar_value=np.sqrt(rmse_temporal/total_num),global_step=itr)
+                writer.add_scalar(tag='Evaluation/rmse_temporal_mean_val',scalar_value=np.sqrt(rmse_temporal_mean/total_num),global_step=itr)
                 
-                writer.add_scalar(tag='Evaluation/distance_spatial_val',scalar_value=mae_spatial/total_num,global_step=itr)\
+                writer.add_scalar(tag='Evaluation/distance_spatial_val',scalar_value=mae_spatial/total_num,global_step=itr)
+                writer.add_scalar(tag='Evaluation/distance_spatial_mean_val',scalar_value=mae_spatial_mean/total_num,global_step=itr)
 
                 # test set
                 loss_test_all, vb_test_all, vb_test_temporal_all, vb_test_spatial_all = 0.0, 0.0, 0.0, 0.0
