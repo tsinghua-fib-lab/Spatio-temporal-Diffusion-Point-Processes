@@ -310,35 +310,14 @@ if __name__ == "__main__":
                     vb_test_spatial_all += vb_spatial
 
                     loss_test_all += loss.item() * event_time_non_mask.shape[0]
-                    
-                    real = (event_time_non_mask[:,0,:].detach().cpu() + MIN[1]) * (MAX[1]-MIN[1])
-                    gen = (sampled_seq[:,0,:1].detach().cpu() + MIN[1]) * (MAX[1]-MIN[1])
-                    assert real.shape==gen.shape
-                    mae_temporal += torch.abs(real-gen).sum().item()
-                    rmse_temporal += ((real-gen)**2).sum().item()
-                    
-                    real = event_loc_non_mask[:,0,:].detach().cpu()
-                    assert real.shape[1:] == torch.tensor(MIN[2:]).shape
-                    real = (real + torch.tensor([MIN[2:]])) * (torch.tensor([MAX[2:]])-torch.tensor([MIN[2:]]))
-                    gen = sampled_seq[:,0,-opt.dim:].detach().cpu()
-                    gen = (gen + torch.tensor([MIN[2:]])) * (torch.tensor([MAX[2:]])-torch.tensor([MIN[2:]]))
-                    assert real.shape==gen.shape
-                    mae_spatial += torch.sqrt(torch.sum((real-gen)**2,dim=-1)).sum().item()
 
                     total_num += gen.shape[0]
-
-                    assert gen.shape[0] == event_time_non_mask.shape[0]
 
                 writer.add_scalar(tag='Evaluation/loss_test',scalar_value=loss_test_all/total_num,global_step=itr)
 
                 writer.add_scalar(tag='Evaluation/NLL_test',scalar_value=vb_test_all/total_num,global_step=itr)
                 writer.add_scalar(tag='Evaluation/NLL_temporal_test',scalar_value=vb_test_temporal_all/total_num,global_step=itr)
                 writer.add_scalar(tag='Evaluation/NLL_spatial_test',scalar_value=vb_test_spatial_all/total_num,global_step=itr)
-
-                writer.add_scalar(tag='Evaluation/mae_temporal_test',scalar_value=mae_temporal/total_num,global_step=itr)
-                writer.add_scalar(tag='Evaluation/rmse_temporal_test',scalar_value=np.sqrt(rmse_temporal/total_num),global_step=itr)
-                
-                writer.add_scalar(tag='Evaluation/distance_spatial_test',scalar_value=mae_spatial/total_num,global_step=itr)
                 
         if itr < warmup_steps:
             for param_group in optimizer.param_groups:
