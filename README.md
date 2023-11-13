@@ -53,10 +53,10 @@ If you found this library useful in your research, please consider citing:
 
 ```
 @inproceedings{yuan2023DSTPP,
-author = {Yuan, Yuan and Ding, Jingtao and Shao, Chenyang and Jin, Depeng and Li, Yong},
-title = {Spatio-Temporal Diffusion Point Processes},
-year = {2023},
-booktitle = {Proceedings of the 29th ACM SIGKDD Conference on Knowledge Discovery and Data Mining},
-pages = {3173–3184},
+  author = {Yuan, Yuan and Ding, Jingtao and Shao, Chenyang and Jin, Depeng and Li, Yong},
+  title = {Spatio-Temporal Diffusion Point Processes},
+  year = {2023},
+  booktitle = {Proceedings of the 29th ACM SIGKDD Conference on Knowledge Discovery and Data Mining},
+  pages = {3173–3184},
 }
 ```
