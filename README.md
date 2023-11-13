@@ -52,5 +52,11 @@ The implemention is based on *[DDPM](https://github.com/lucidrains/denoising-dif
 If you found this library useful in your research, please consider citing:
 
 ```
-Coming soon...
+@inproceedings{yuan2023DSTPP,
+author = {Yuan, Yuan and Ding, Jingtao and Shao, Chenyang and Jin, Depeng and Li, Yong},
+title = {Spatio-Temporal Diffusion Point Processes},
+year = {2023},
+booktitle = {Proceedings of the 29th ACM SIGKDD Conference on Knowledge Discovery and Data Mining},
+pages = {3173–3184},
+}
 ```
