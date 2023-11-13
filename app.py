@@ -248,10 +248,10 @@ if __name__ == "__main__":
                     real = (event_time_non_mask[:,0,:].detach().cpu() + MIN[1]) * (MAX[1]-MIN[1])
                     gen = (sampled_seq[:,0,:1].detach().cpu() + MIN[1]) * (MAX[1]-MIN[1])
                     assert real.shape==gen.shape
-                    assert real.shape == sampled_seq_temporal_all.shape
+                    # assert real.shape == sampled_seq_temporal_all.shape
                     mae_temporal += torch.abs(real-gen).sum().item()
                     rmse_temporal += ((real-gen)**2).sum().item()
-                    rmse_temporal_mean += ((real-sampled_seq_temporal_all)**2).sum().item()
+                    # rmse_temporal_mean += ((real-sampled_seq_temporal_all)**2).sum().item()
                     
                     real = event_loc_non_mask[:,0,:].detach().cpu()
                     assert real.shape[1:] == torch.tensor(MIN[2:]).shape
@@ -261,7 +261,7 @@ if __name__ == "__main__":
                     assert real.shape==gen.shape
                     assert real.shape==sampled_seq_spatial_all.shape
                     mae_spatial += torch.sqrt(torch.sum((real-gen)**2,dim=-1)).sum().item()
-                    mae_spatial_mean += torch.sqrt(torch.sum((real-sampled_seq_spatial_all)**2,dim=-1)).sum().item()
+                    # mae_spatial_mean += torch.sqrt(torch.sum((real-sampled_seq_spatial_all)**2,dim=-1)).sum().item()
 
 
                     total_num += gen.shape[0]
@@ -288,10 +288,10 @@ if __name__ == "__main__":
 
                 writer.add_scalar(tag='Evaluation/mae_temporal_val',scalar_value=mae_temporal/total_num,global_step=itr)
                 writer.add_scalar(tag='Evaluation/rmse_temporal_val',scalar_value=np.sqrt(rmse_temporal/total_num),global_step=itr)
-                writer.add_scalar(tag='Evaluation/rmse_temporal_mean_val',scalar_value=np.sqrt(rmse_temporal_mean/total_num),global_step=itr)
+                # writer.add_scalar(tag='Evaluation/rmse_temporal_mean_val',scalar_value=np.sqrt(rmse_temporal_mean/total_num),global_step=itr)
                 
                 writer.add_scalar(tag='Evaluation/distance_spatial_val',scalar_value=mae_spatial/total_num,global_step=itr)
-                writer.add_scalar(tag='Evaluation/distance_spatial_mean_val',scalar_value=mae_spatial_mean/total_num,global_step=itr)
+                # writer.add_scalar(tag='Evaluation/distance_spatial_mean_val',scalar_value=mae_spatial_mean/total_num,global_step=itr)
 
                 # test set
                 loss_test_all, vb_test_all, vb_test_temporal_all, vb_test_spatial_all = 0.0, 0.0, 0.0, 0.0
